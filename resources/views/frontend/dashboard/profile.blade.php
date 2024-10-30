@@ -48,7 +48,7 @@
 
 
                             <div class="wsus__dash_pass_change mt-2">
-                                <form {{-- action="{{route('user.profile.update.password')}}" --}} method="POST">
+                                <form action="{{route('user.profile.update.password')}}" method="POST">
                                     @csrf
                                     <div class="row">
                                         <h4>Update Password</h4>
