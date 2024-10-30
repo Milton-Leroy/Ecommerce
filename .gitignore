@@ -16,3 +16,5 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+/resources/views/admin-template
+/resources/views/ecommerce-frontend-template
