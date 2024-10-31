@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\CreateSliderReqeust;
 use App\Models\Slider;
+use App\Traits\ImageUploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class SliderController extends Controller
 {
+    use ImageUploadTrait;
     /**
      * Display a listing of the resource.
      */
@@ -32,6 +34,11 @@ class SliderController extends Controller
     public function store(CreateSliderReqeust $request)
     {
         $slider = new Slider();
+
+        //Handle image upload
+        $imagePath = $this->uploadImage($request, 'banner', 'uploads/slider');
+
+        $slider->banner = $imagePath;
         $slider->type = $request->type;
         $slider->title = $request->title;
         $slider->starting_price = $request->starting_price;
