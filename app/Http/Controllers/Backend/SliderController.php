@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\CreateSliderReqeust;
 use App\Models\Slider;
 use App\Traits\ImageUploadTrait;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -16,7 +18,7 @@ class SliderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(SliderDataTable $dataTable)
+    public function index(SliderDataTable $dataTable): View | JsonResponse
     {
         return $dataTable->render('admin.slider.index');
     }
@@ -32,7 +34,7 @@ class SliderController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(CreateSliderReqeust $request)
+    public function store(CreateSliderReqeust $request): RedirectResponse
     {
         $slider = new Slider();
 
@@ -50,23 +52,16 @@ class SliderController extends Controller
 
         toastr()->success('Created Successfully!');
 
-        return redirect()->back();
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        return to_route('admin.slider.index');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id): View
     {
-        //
+        $slider = Slider::findOrFail($id);
+        return view('admin.slider.edit', compact('slider'));
     }
 
     /**
