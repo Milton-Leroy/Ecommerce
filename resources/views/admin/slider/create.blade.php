@@ -20,7 +20,7 @@
                     <form action="{{route('admin.slider.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
-                            <label>Banner</label>
+                            <label>Banner <span class="text-danger">*</span></label>
                             <input type="file" class="form-control" name="banner">
                         </div>
 
@@ -29,7 +29,7 @@
                             <input type="text" class="form-control" name="type" value="{{old('type')}}">
                         </div>
                         <div class="form-group">
-                            <label>Title</label>
+                            <label>Title <span class="text-danger">*</label>
                             <input type="text" class="form-control" name="title"  value="{{old('title')}}">
                         </div>
                         <div class="form-group">
@@ -38,14 +38,14 @@
                         </div>
                         <div class="form-group">
                             <label>Button Url</label>
-                            <input type="text" class="form-control" name="btn_url" value="{{old('btn_url')}}">
+                            <input type="url" class="form-control" name="btn_url" value="{{old('btn_url')}}">
                         </div>
                         <div class="form-group">
-                            <label>Serial</label>
-                            <input type="text" class="form-control" name="serial" value="{{old('serial')}}">
+                            <label>Serial <span class="text-danger">*</label>
+                            <input type="number" class="form-control" name="serial" value="{{old('serial')}}">
                         </div>
                         <div class="form-group">
-                            <label for="inputState">Status</label>
+                            <label for="inputState">Status <span class="text-danger">*</label>
                             <select id="inputState" class="form-control" name="status">
                               <option value="1">Active</option>
                               <option value="0">Inactive</option>
