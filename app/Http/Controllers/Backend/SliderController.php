@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\DataTables\SliderDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\CreateSliderReqeust;
+use App\Http\Requests\Backend\UpdateSliderRequest;
 use App\Models\Slider;
 use App\Traits\ImageUploadTrait;
 use Illuminate\Http\JsonResponse;
@@ -18,7 +19,7 @@ class SliderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(SliderDataTable $dataTable): View | JsonResponse
+    public function index(SliderDataTable $dataTable): View|JsonResponse
     {
         return $dataTable->render('admin.slider.index');
     }
@@ -67,9 +68,27 @@ class SliderController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateSliderRequest $request, string $id): RedirectResponse
     {
-        //
+        $slider = Slider::findOrFail($id);
+
+        //Delete old image and then upload the new one
+        if ($request->has('banner')) {
+            $imagePath = $this->updateImage($request, 'banner', 'uploads/slider', $slider->banner);
+            $slider->banner = $imagePath;
+        }
+
+        $slider->type = $request->type;
+        $slider->title = $request->title;
+        $slider->starting_price = $request->starting_price;
+        $slider->btn_url = $request->btn_url;
+        $slider->serial = $request->serial;
+        $slider->status = $request->status;
+        $slider->save();
+
+        toastr()->success('Updated Successfully!');
+
+        return to_route('admin.slider.index');
     }
 
     /**

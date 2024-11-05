@@ -21,5 +21,22 @@ trait ImageUploadTrait
             return $path.'/'.$imageName;
         }
     }
+    public function updateImage(Request $request, $inputName, $path, $oldPath=null)
+    {
+        if ($request->hasFile($inputName)) {
+
+            if(File::exists(public_path($oldPath))){
+                File::delete(public_path($oldPath));
+            }
+
+            $image = $request->{$inputName};
+            $ext = $image->getClientOriginalExtension();
+            $imageName = 'media_'.uniqid().'_'.date('d-m-Y_h-i').'.'.$ext;
+
+            $image->move(public_path($path), $imageName);
+
+            return $path.'/'.$imageName;
+        }
+    }
 
 }
