@@ -11,6 +11,7 @@ use App\Traits\ImageUploadTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class SliderController extends Controller
@@ -94,8 +95,15 @@ class SliderController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): Response
     {
-        //
+        $slider = Slider::findOrFail($id);
+
+        /* Delete images from public folder */
+        $this->deleteImage($slider->banner);
+
+        $slider->delete();
+
+        return response(['status' => 'success', 'message' => 'Deleted successfully!']);
     }
 }
