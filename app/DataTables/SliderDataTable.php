@@ -33,7 +33,7 @@ class SliderDataTable extends DataTable
             })
             ->addColumn('status', function($query){
                 if ($query->status === 1) {
-                    return "<span class='badge badge-primary'>Active</span>";
+                    return "<span class='badge badge-success'>Active</span>";
                 } else {
                     return "<span class='badge badge-danger'>Inactive</span>";
                 }
@@ -81,7 +81,7 @@ class SliderDataTable extends DataTable
             Column::make('id'),
             Column::make('banner'),
             Column::make('title'),
-            Column::make('type'),
+            Column::make('serial'),
             Column::make('status'),
             Column::computed('action')
             ->exportable(false)

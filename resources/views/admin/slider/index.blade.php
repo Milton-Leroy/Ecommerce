@@ -19,7 +19,7 @@
                     <div class="card-header">
                         <h4>All Sliders</h4>
                         <div class="card-header-action">
-                            <a href="{{ route('admin.slider.create') }}" class="btn btn-primary">+ Create New</a>
+                            <a href="{{ route('admin.slider.create') }}" class="btn btn-primary"><i class="fas fa-plus"></i> Create New</a>
                         </div>
                     </div>
                     <div class="card-body">
