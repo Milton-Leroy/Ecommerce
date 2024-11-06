@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Backend;
 
 use App\DataTables\CategoryDataTable;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Str;
 
 class CategoryController extends Controller
 {
@@ -31,23 +33,31 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+       $request->validate([
+            "icon" => ['required', 'not_in:empty' ,'string', 'max:50'],
+            "name" => ['required', 'string', 'max:200', 'unique:categories,name'],
+            "status" => ['required', 'boolean'],
+       ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+       $category = new Category();
+       $category->icon = $request->icon ;
+       $category->name = $request->name ;
+       $category->slug = Str::slug($request->name);
+       $category->status = $request->status ;
+       $category->save();
+
+       toastr()->success('Created Successfully!');
+
+       return to_route('admin.category.index');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id): View
     {
-        //
+        $category = Category::findOrFail($id);
+        return view('admin.category.edit', compact('category'));
     }
 
     /**
