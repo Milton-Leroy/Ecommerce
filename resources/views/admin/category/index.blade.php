@@ -33,4 +33,36 @@
 
 @push('scripts')
     {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
+
+    {{-- ajax script forenabling and disablign category from data table --}}
+
+    <script>
+        $(document).ready(function(){
+            $('body').on('click', '.change-status', function(){
+
+                let isChecked = $(this).is(':checked');
+                let id = $(this).data('id');
+
+                $.ajax({
+                    url: "{{ route('admin.category.change-status') }}",
+                    method: 'PUT',
+                    data: {
+                        id: id,
+                        status: isChecked,
+                        _token: "{{ csrf_token() }}"
+                    },
+                    success: function(response){
+                        if(response.status){
+                            toastr.success(response.message);
+                        }else{
+                            toastr.error(response.message);
+                        }
+                    },
+                    error: function(xhr, status, error){
+                        console.log(error);
+                    }
+                })
+            })
+        })
+    </script>
 @endpush
