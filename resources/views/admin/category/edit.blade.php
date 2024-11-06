@@ -19,11 +19,12 @@
                   <div class="card-body">
                     <form action="{{route('admin.category.update', $category->id)}}" method="POST">
                         @csrf
+                        @method('PUT')
                         <div class="form-group">
                             <label>Icon <span class="text-danger">*</span></label>
                              <div>
-                                <button class="btn btn-primary" data-icon="" data-selected-class="btn-danger"
-                                data-unselected-class="btn-info" role="iconpicker" name="icon"></button>
+                                <button class="btn btn-primary" data-icon="{{ $category->icon }}" data-selected-class="btn-danger"
+                                data-unselected-class="btn-info" role="iconpicker" name="icon" ></button>
                              </div>
 
                         </div>
