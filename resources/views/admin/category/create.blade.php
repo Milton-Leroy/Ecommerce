@@ -20,7 +20,7 @@
                     <form action="{{route('admin.category.store')}}" method="POST">
                         @csrf
                         <div class="form-group">
-                            <label>Icon</label>
+                            <label>Icon <span class="text-danger">*</span></label>
                              <div>
                                 <button class="btn btn-primary" data-icon="" data-selected-class="btn-danger"
                                 data-unselected-class="btn-info" role="iconpicker" name="icon"></button>
@@ -28,11 +28,11 @@
 
                         </div>
                         <div class="form-group">
-                            <label>Name</label>
+                            <label>Name <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" name="name" value="">
                         </div>
                         <div class="form-group">
-                            <label for="inputState">Status</label>
+                            <label for="inputState">Status <span class="text-danger">*</span></label>
                             <select id="inputState" class="form-control" name="status">
                               <option value="1">Active</option>
                               <option value="0">Inactive</option>
