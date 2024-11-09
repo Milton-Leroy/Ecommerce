@@ -29,5 +29,6 @@ Route::put('sub-category/change-status', [SubCategoryController::class, 'changeS
 Route::resource('sub-category', SubCategoryController::class);
 
 /* Child Category Routes */
+Route::get('get-subcategories', [ChildCategoryController::class, 'getSubCategories'])->name('get-subcategories');
 Route::put('child-category/change-status', [ChildCategoryController::class, 'changeStatus'])->name('child-category.change-status');
 Route::resource('child-category', ChildCategoryController::class);
