@@ -9,6 +9,7 @@ use App\Models\ChildCategory;
 use App\Models\SubCategory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\View\View;
 use Str;
 
@@ -97,10 +98,25 @@ class ChildCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): Response
     {
-        //
+       ChildCategory::findOrFail($id)->delete();
+
+        return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
     }
+
+    /* Enable or disable child category from data table */
+    public function changeStatus(Request $request): Response
+    {
+        $childCategory = ChildCategory::findOrFail($request->id);
+
+        $childCategory->status = $request->status == 'true' ? 1 : 0;
+        $childCategory->save();
+
+        return response(['status' => 'success', 'message' => 'Status updated sucessfully!']);
+    }
+
+    /* Get sub categories */
     public function getSubCategories(Request $request)
     {
         $subCategories = SubCategory::where('category_id', $request->id)->where('status', 1)->get();
