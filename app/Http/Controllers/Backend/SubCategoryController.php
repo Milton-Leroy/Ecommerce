@@ -70,7 +70,7 @@ class SubCategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id): RedirectResponse
     {
         $request->validate([
             'category' => ['required'],
@@ -94,9 +94,11 @@ class SubCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): Response
     {
-        //
+       SubCategory::findOrFail($id)->delete();
+
+        return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
     }
 
     public function changeStatus(Request $request): Response
