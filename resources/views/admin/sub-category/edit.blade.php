@@ -25,7 +25,7 @@
                             @csrf
                             @method('PUT')
                             <div class="form-group">
-                                <label for="inputState">Category</label>
+                                <label for="inputState">Category <span class="text-danger">*</span></label>
                                 <select id="inputState" class="form-control" name="category">
                                     <option value="">Select</option>
                                     @foreach ($categories as $category)
@@ -34,11 +34,11 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label>Name</label>
+                                <label>Name <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" name="name" value="{{ $subCategory->name }}">
                             </div>
                             <div class="form-group">
-                                <label for="inputState">Status</label>
+                                <label for="inputState">Status <span class="text-danger">*</span></label>
                                 <select id="inputState" class="form-control" name="status">
                                     <option value="1" @selected($subCategory->status === 1)>Active</option>
                                     <option value="0" @selected($subCategory->status === 0)>Inactive</option>
