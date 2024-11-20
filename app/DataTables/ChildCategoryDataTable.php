@@ -32,7 +32,7 @@ class ChildCategoryDataTable extends DataTable
                 return $query->category->name;
             })
             ->addColumn('sub_category', function($query){
-                return $query->subCategory->name;
+                return $query->sub_category->name;
             })
             ->addColumn('status', function ($query) {
                 if ($query->status == 1) {
