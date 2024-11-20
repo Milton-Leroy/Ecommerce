@@ -10,11 +10,12 @@ class ChildCategory extends Model
 {
     use HasFactory;
 
-    public function category(): BelongsTo
+    public function category()
     {
         return $this->belongsTo(Category::class);
     }
-    public function sub_category(): BelongsTo
+
+    public function subCategory()
     {
         return $this->belongsTo(SubCategory::class);
     }

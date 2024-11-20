@@ -28,11 +28,11 @@ class ChildCategoryDataTable extends DataTable
 
                 return $editBtn . $deleteBtn;
             })
-            ->addColumn('category', function ($query) {
+            ->addColumn('category', function($query){
                 return $query->category->name;
             })
-            ->addColumn('sub_category', function ($query) {
-                return $query->sub_category->name;
+            ->addColumn('sub_category', function($query){
+                return $query->subCategory->name;
             })
             ->addColumn('status', function ($query) {
                 if ($query->status == 1) {
